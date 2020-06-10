@@ -8,6 +8,8 @@ $("#query-form").submit(function (event) {
   event.preventDefault();
 
   $(".loading")[0].innerHTML = spinner;
+  $("#content")[0].innerHTML = "";
+  $("#more")[0].innerHTML = "";
 
   var $form = $(this),
     tag = $form.find("input[name='hashtag']").val(),
