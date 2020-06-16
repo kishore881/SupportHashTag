@@ -8,7 +8,7 @@ $("#trend-form").submit(function (event) {
   event.preventDefault();
 
   $(".loading")[0].innerHTML = spinner;
-  $("#content")[0].innerHTML = "";
+  $('.container-md')[1].innerHTML = "";
   $('.messages')[0].innerHTML = "";
 
   var $form = $(this),
