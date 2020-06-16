@@ -8,7 +8,12 @@ $("#trend-form").submit(function (event) {
   event.preventDefault();
 
   $(".loading")[0].innerHTML = spinner;
-  $('.container-md')[1].innerHTML = "";
+  if ($('#region-head')[0]) {
+    $('#region-head').remove();
+  }
+  if ($('#content')[0]) {
+    $('#content')[0].innerHTML = "";
+  }
   $('.messages')[0].innerHTML = "";
 
   var $form = $(this),
@@ -30,11 +35,11 @@ $("#trend-form").submit(function (event) {
 });
 
 function renderTrends(region, trends) {
-  $($('.container-md')[1]).prepend(`<h4 class='mx-auto mb-4 pb-2 text-center border-bottom'>Trending in <b>${region}</b></h4>`);
+  $($('.container-md')[1]).prepend(`<h4 class='mx-auto mb-4 pb-2 text-center border-bottom' id='region-head'>Trending in <b>${region}</b></h4>`);
   for (i = 0; i < trends.length; i++) {
     addTrend(trends[i], i);
   }
-  $(".trend").css({ "height": "5vh", "display": "flex", "flex-direction": "column", "justify-content": "center" });
+  console.log($('#content'));
 }
 
 function addTrend(trend, i) {
