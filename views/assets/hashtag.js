@@ -16,15 +16,17 @@ $("#query-form").submit(function (event) {
     url = '/tweets';
 
   $.get(url, { hashtag: tag }, function (data) {
+    if (data.msg) {
+      $(".loading")[0].innerHTML = '';
+      $(".messages")[0].innerHTML = data.msg;
+    }
     tweets = data.tweets;
     hashtag = data.hashtag;
-    console.log('data received');
     render();
   });
 });
 
 function render() {
-  console.log(tweets.length);
   let count = Math.min(20, tweets.length);
   addTargets(tweets.slice(0, count), (count < tweets.length), hashtag);
   tweets = tweets.slice(count, tweets.length);

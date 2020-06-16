@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const Twitter = require('../config/twitter-config');
+const woeid = require('twitter-woeid');
 
 router.get('/', (req, res) => {
   res.render('index', { tweets: [], hashtag: "" });
@@ -22,14 +23,30 @@ router.get('/tweets', (req, res) => {
   ) {
     if (!err && data.statuses) {
       var tweets = data.statuses;
-      console.log(tweets.length);
-      console.log(data.search_metadata);
       res.send({ tweets: tweets, hashtag: req.query.hashtag });
     } else {
-      console.log(err);
+      res.send({ msg: 'Unknown Error. Please try again later.' });
     }
   });
 
+});
+
+router.get('/trends', (req, res) => {
+  const region = woeid.getSingleWOEID(req.query.region)[0];
+  if (region) {
+    const params = {
+      id: region.woeid,
+    }
+    Twitter.get("trends/place", params, function (err, data, response) {
+      if (!err) {
+        res.send({ region: data[0].locations[0].name, trends: data[0].trends, msg: null });
+      } else {
+        res.send({ msg: 'Unknown error. Please try again later.' });
+      }
+    })
+  } else {
+    res.send({ msg: 'No trends found for the region given. Please try something else.' });
+  }
 });
 
 module.exports = router;
