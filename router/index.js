@@ -5,7 +5,10 @@ const Twitter = require('../config/twitter-config');
 const woeid = require('twitter-woeid');
 
 router.get('/', (req, res) => {
-  res.render('index', { tweets: [], hashtag: "" });
+  res.sendFile('index.html', { root: 'views' });
+});
+router.get('/trending', (req, res) => {
+  res.sendFile('trends.html', { root: 'views' });
 });
 
 router.get('/tweets', (req, res) => {
@@ -38,14 +41,14 @@ router.get('/trends', (req, res) => {
       id: region.woeid,
     }
     Twitter.get("trends/place", params, function (err, data, response) {
-      if (!err) {
+      if (!err && data[0].trends) {
         res.send({ region: data[0].locations[0].name, trends: data[0].trends, msg: null });
       } else {
         res.send({ msg: 'Unknown error. Please try again later.' });
       }
     })
   } else {
-    res.send({ msg: 'No trends found for the region given. Please try something else.' });
+    res.send({ msg: 'No trends data found for the region. Please check the spelling or try something else.' });
   }
 });
 

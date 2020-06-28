@@ -29,7 +29,7 @@ $("#trend-form").submit(function (event) {
       renderTrends(data.region, data.trends);
     }
     else {
-      $(".messages")[0].innerHTML = `<p>Unknown Error. Please try again later/</p>`;
+      $(".messages")[0].innerHTML = `<p>Unknown Error. Please try again later.</p>`;
     }
   });
 });
@@ -47,7 +47,7 @@ function addTrend(trend, i) {
 }
 
 const Trend = (trend, i) => {
-  if (trend.tweet_volume) return (`<div class="card m-2" style="width:20rem">
+  if (trend.tweet_volume) return (`<div class="card m-2 border-dark" style="width:20rem">
   <div class="card-body">
     <small class="text-muted">${i + 1}. Trending</small>
     <h5 class="card-title">${trend.name}</h5>
@@ -55,7 +55,7 @@ const Trend = (trend, i) => {
     <a href="${trend.url}" target=null class="card-link">See On Twitter</a>
   </div>
 </div>`); else {
-    return (`<div class="card m-2" style="width:20rem">
+    return (`<div class="card m-2 border-dark" style="width:20rem">
     <div class="card-body">
       <small class="text-muted">${i + 1}. Trending</small>
       <h5 class="card-title">${trend.name}</h5>
