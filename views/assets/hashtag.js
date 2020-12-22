@@ -68,6 +68,7 @@ function addWidgets(tweets, anymore, hashtag) {
   }
 }
 function findMore(text, hashtag) {
+  if(!$('#load-btn')[0]) loadButton('');
   $('#load-btn').prop("onclick", null).off("click");
   $('#load-btn')[0].innerText = text;
   $('#load-btn').wrap(`<a href="https://twitter.com/search/?q=%23${hashtag}" target=null></a>`);
