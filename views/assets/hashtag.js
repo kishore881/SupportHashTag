@@ -27,7 +27,7 @@ $("#query-form").submit(function (event) {
 });
 
 function render() {
-  let count = Math.min(20, tweets.length);
+  let count = Math.min(10, tweets.length);
   addTargets(tweets.slice(0, count), (count < tweets.length), hashtag);
   tweets = tweets.slice(count, tweets.length);
 }
@@ -35,9 +35,9 @@ function render() {
 
 function addTargets(tweets, anymore, hashtag) {
   for (i = 0; i < tweets.length; i++) {
-    if ($(`#${tweets[i].id_str}`)[0]) continue;
+    if ($(`#${tweets[i].tweet_id}`)[0]) continue;
     $("#content").append(`<div class="card border-0 m-0">
-    <div class="tweet shadow-sm" style="min-width: 300px;" id="${tweets[i].id_str}"></div>
+    <div class="tweet shadow-sm" style="min-width: 300px;" id="${tweets[i].tweet_id}"></div>
   </div>`);
   }
 
@@ -47,7 +47,7 @@ function addTargets(tweets, anymore, hashtag) {
 function addWidgets(tweets, anymore, hashtag) {
   for (i = 0; i < tweets.length; i++) {
     twttr.widgets.createTweet(
-      tweets[i].id_str, $(`#${tweets[i].id_str}`)[0],
+      tweets[i].tweet_id, $(`#${tweets[i].tweet_id}`)[0],
       {
         conversation: 'all',    // or all
         cards: 'visible',  // or hidden
