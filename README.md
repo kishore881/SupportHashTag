@@ -1,7 +1,7 @@
 # SupportHashTag
 > Find Trends in any region and Tweets on any HashTag [^1]
 >
-> Built with Node.js and EJS using [Twitter Rapid API](https://rapidapi.com/omarmhaimdat/api/twitter154) [^2]
+> Built with Node.js, Express.js, HTML and jQuery using [Twitter Rapid API](https://rapidapi.com/omarmhaimdat/api/twitter154) [^2]
 
 Currently hosted at: https://support-hashtag.onrender.com/
 
